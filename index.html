@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriManager - Your Farm, Managed</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+    <!-- GSAP Animation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <!-- Custom Styles -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0D0D0D; /* Near black for a softer feel */
+            color: #EAEAEA;
+            overscroll-behavior: none;
+        }
+        .bg-primary { background-color: #22c55e; } /* Green-500 */
+        .text-primary { color: #22c55e; }
+        .bg-primary-gradient {
+             background-image: linear-gradient(to right, #22c55e, #4ade80); /* green-500 to green-400 */
+        }
+        .border-primary { border-color: #22c55e; }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* --- Hero Section Background --- */
+        .hero-background::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: radial-gradient(circle at 50% 30%, rgba(34, 197, 94, 0.1), transparent 60%);
+            opacity: 0;
+            transform: scale(0.8);
+            z-index: 0;
+        }
+
+        /* --- Horizontal Scroll Section --- */
+        #horizontal-scroll-section {
+            background-color: #000;
+            color: #f5f5f7;
+            overflow: hidden;
+        }
+        .horizontal-track {
+            display: flex;
+            align-items: center;
+            padding: 0 calc(50vw - 160px); 
+            width: max-content;
+        }
+        .track-item {
+            flex-shrink: 0;
+            padding: 0 4vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .phone-slide {
+            width: 220px; /* Slightly larger phone */
+            aspect-ratio: 320 / 650;
+            position: relative;
+            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+        }
+        .text-block {
+            width: 350px;
+        }
+        .phone-mockup {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #1c1c1c;
+            border-radius: 36px;
+            border: 10px solid #1c1c1c;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.7);
+        }
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: #0D0D0D;
+            border-radius: 26px;
+            overflow: hidden;
+        }
+        .phone-screen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background-color: #0D0D0D;
+        }
+        
+        /* Initial state for animations */
+        .gsap-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="bg-black/50 backdrop-blur-lg sticky top-0 z-50 border-b border-gray-800">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H7a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                </svg>
+                <h1 class="text-2xl font-bold text-white">AgriManager</h1>
+            </a>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#features" class="text-gray-400 hover:text-primary transition">Features</a>
+                <a href="#gallery" class="text-gray-400 hover:text-primary transition">Screens</a>
+                <a href="#download" class="text-gray-400 hover:text-primary transition">Download</a>
+            </nav>
+            <a href="#download" class="hidden md:block bg-primary-gradient text-white px-5 py-2 rounded-full font-bold hover:opacity-90 transition shadow-lg shadow-green-500/20">
+                Get the App
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="py-24 md:py-40 relative hero-background overflow-hidden">
+            <div class="container mx-auto px-6 text-center relative z-10">
+                <div class="max-w-4xl mx-auto">
+                    <h2 class="text-5xl md:text-7xl font-extrabold tracking-tight gsap-reveal">Your Farm, Managed.</h2>
+                    <p class="mt-8 text-lg md:text-xl text-gray-400 max-w-2xl mx-auto gsap-reveal">
+                        From seed to sale, AgriManager is the all-in-one solution for modern farmers. Track crops, manage tasks, and watch your profits grow.
+                    </p>
+                    <div class="mt-10 gsap-reveal">
+                        <a href="#download" class="bg-primary-gradient text-white px-10 py-4 rounded-full text-lg font-bold hover:opacity-90 transition-transform transform hover:scale-105 shadow-xl shadow-green-500/30 inline-block">
+                            Download for Free
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Horizontal Scroll Section -->
+        <section id="horizontal-scroll-section" class="h-[300vh] relative">
+            <div class="sticky top-0 h-screen w-full flex flex-col justify-center">
+                <div class="w-full max-w-4xl mx-auto text-center px-6 mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold gsap-reveal">Your Farm, At a Glance.</h2>
+                    <p class="text-gray-400 mt-4 text-lg gsap-reveal">Intuitive tools designed to bring clarity to your daily operations.</p>
+                </div>
+                <div class="horizontal-track">
+                    <div class="track-item">
+                        <div class="text-block">
+                            <h3 class="text-2xl font-semibold">Track Every Crop</h3>
+                            <p class="text-gray-400 mt-2">Monitor planting dates, growth stages, and record observations with photos.</p>
+                        </div>
+                    </div>
+                    <div class="track-item">
+                        <div class="phone-slide"><div class="phone-mockup"><div class="phone-screen"><img src="https://placehold.co/320x650/0D0D0D/22c55e?text=Tomato+Records" alt="Crop Records Screen"></div></div></div>
+                    </div>
+                    <div class="track-item">
+                        <div class="phone-slide"><div class="phone-mockup"><div class="phone-screen"><img src="https://placehold.co/320x650/0D0D0D/22c55e?text=Cucumber+Log" alt="Crop Log Screen"></div></div></div>
+                    </div>
+                    <div class="track-item">
+                        <div class="text-block">
+                            <h3 class="text-2xl font-semibold">Smart Scheduling</h3>
+                            <p class="text-gray-400 mt-2">Never miss a task. Plan watering, fertilizing, and harvesting with our intelligent calendar.</p>
+                        </div>
+                    </div>
+                    <div class="track-item">
+                        <div class="phone-slide"><div class="phone-mockup"><div class="phone-screen"><img src="https://placehold.co/320x650/0D0D0D/22c55e?text=Task+Calendar" alt="Task Calendar Screen"></div></div></div>
+                    </div>
+                     <div class="track-item">
+                        <div class="text-block">
+                            <h3 class="text-2xl font-semibold">Financial Clarity</h3>
+                            <p class="text-gray-400 mt-2">Log expenses and income to see your profitability. Make data-driven decisions.</p>
+                        </div>
+                    </div>
+                    <div class="track-item">
+                        <div class="phone-slide"><div class="phone-mockup"><div class="phone-screen"><img src="https://placehold.co/320x650/0D0D0D/22c55e?text=Profit+Report" alt="Financial Report Screen"></div></div></div>
+                    </div>
+                     <div class="track-item">
+                        <div class="phone-slide"><div class="phone-mockup"><div class="phone-screen"><img src="https://placehold.co/320x650/0D0D0D/22c55e?text=Expense+Log" alt="Expense Log Screen"></div></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Detailed Features Section -->
+        <section id="features" class="py-24 bg-black">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-20">
+                    <h2 class="text-4xl md:text-5xl font-bold gsap-reveal">Powerful Tools. Simple Interface.</h2>
+                    <p class="text-gray-400 mt-4 max-w-2xl mx-auto gsap-reveal">Everything you need to manage your farm efficiently, without the complexity.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16 md:gap-y-24 items-center">
+                    <div class="gsap-feature">
+                        <div class="flex items-center gap-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            <h3 class="text-2xl font-bold">At-a-Glance Dashboard</h3>
+                        </div>
+                        <p class="mt-2 text-gray-400">Your farm's vital signs on one screen. See today's tasks, weather forecasts, and crop status instantly.</p>
+                    </div>
+                    <div class="gsap-feature">
+                        <img src="https://placehold.co/600x400/000000/1C1C1C?text=Dashboard+UI" alt="Dashboard UI" class="rounded-3xl shadow-lg w-full border border-gray-800">
+                    </div>
+
+                    <div class="gsap-feature md:order-last">
+                         <div class="flex items-center gap-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                            <h3 class="text-2xl font-bold">AI-Powered Advisor</h3>
+                        </div>
+                        <p class="mt-2 text-gray-400">Got a question? Our AI advisor analyzes your data to provide actionable insights and suggestions for your crops.</p>
+                    </div>
+                    <div class="gsap-feature md:order-first">
+                        <img src="https://placehold.co/600x400/000000/1C1C1C?text=AI+Advisor" alt="AI Advisor Chat" class="rounded-3xl shadow-lg w-full border border-gray-800">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery" class="py-24 bg-black">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold gsap-reveal">Designed for the Field.</h2>
+                    <p class="text-gray-400 mt-4 max-w-2xl mx-auto gsap-reveal">A clean, high-contrast interface that's easy to use, even in bright sunlight.</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                    <div class="gsap-gallery-item"><img src="https://placehold.co/300x600/0D0D0D/22c55e?text=Crop+List" alt="Crop List Screenshot" class="rounded-3xl shadow-lg w-full h-full object-cover border-2 border-gray-800"></div>
+                    <div class="gsap-gallery-item"><img src="https://placehold.co/300x600/0D0D0D/22c55e?text=Calendar+View" alt="Calendar View Screenshot" class="rounded-3xl shadow-lg w-full h-full object-cover border-2 border-gray-800"></div>
+                    <div class="gsap-gallery-item"><img src="https://placehold.co/300x600/0D0D0D/22c55e?text=New+Record" alt="New Record Screenshot" class="rounded-3xl shadow-lg w-full h-full object-cover border-2 border-gray-800"></div>
+                    <div class="gsap-gallery-item"><img src="https://placehold.co/300x600/0D0D0D/22c55e?text=Finance+Chart" alt="Finance Chart Screenshot" class="rounded-3xl shadow-lg w-full h-full object-cover border-2 border-gray-800"></div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Download Section -->
+        <section id="download" class="py-24">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-4xl md:text-5xl font-bold gsap-reveal">Start growing smarter today.</h2>
+                <p class="text-gray-400 mt-6 max-w-2xl mx-auto gsap-reveal">AgriManager is free to download. Take control of your farm and watch your harvest flourish.</p>
+                <div class="mt-10 flex flex-col sm:flex-row justify-center items-center gap-6 gsap-reveal">
+                    <a href="#" class="inline-block h-14">
+                        <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" class="h-full w-auto">
+                    </a>
+                    <a href="#" class="inline-block h-14">
+                        <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" class="h-[57px] w-auto object-contain">
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black border-t border-gray-800">
+        <div class="container mx-auto px-6 py-10">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 text-center sm:text-left">
+                <div>
+                    <h3 class="font-bold text-lg text-white">AgriManager</h3>
+                    <p class="mt-2 text-gray-500 text-sm">Your Farm, Managed.</p>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg text-white">Navigate</h3>
+                    <ul class="mt-2 space-y-2 text-sm">
+                        <li><a href="#features" class="text-gray-400 hover:text-white">Features</a></li>
+                        <li><a href="#gallery" class="text-gray-400 hover:text-white">Screens</a></li>
+                        <li><a href="#download" class="text-gray-400 hover:text-white">Download</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg text-white">Legal</h3>
+                    <ul class="mt-2 space-y-2 text-sm">
+                        <li><a href="privacy.html" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
+                        <li><a href="terms.html" class="text-gray-400 hover:text-white">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-10 border-t border-gray-700 pt-6 text-center text-sm text-gray-500">
+                <p>&copy; <span id="year"></span> AgriManager. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // --- General Reveal Animation ---
+            gsap.utils.toArray('.gsap-reveal').forEach(el => {
+                gsap.fromTo(el, 
+                    { opacity: 0, y: 30 },
+                    {
+                        opacity: 1, y: 0, duration: 1.2, ease: 'power4.out',
+                        scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none none' }
+                    }
+                );
+            });
+
+            // --- Hero Section Animations ---
+            gsap.fromTo('.hero-background::before', 
+                { opacity: 0, scale: 0.8 }, 
+                { opacity: 1, scale: 1, duration: 1.5, ease: 'power3.out' }
+            );
+            
+            // --- Horizontal Scroll Animation ---
+            const track = document.querySelector('.horizontal-track');
+            const items = gsap.utils.toArray('.track-item');
+
+            if (track) {
+                gsap.to(track, {
+                    x: () => -(track.scrollWidth - window.innerWidth),
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: "#horizontal-scroll-section",
+                        pin: true,
+                        scrub: 1,
+                        end: () => "+=" + (track.scrollWidth - window.innerWidth),
+                        // Add the onUpdate callback for the phone animation
+                        onUpdate: (self) => {
+                            items.forEach(item => {
+                                const phone = item.querySelector('.phone-slide');
+                                if (!phone) return;
+                                
+                                const rect = item.getBoundingClientRect();
+                                const dist = Math.abs(rect.left + rect.width / 2 - window.innerWidth / 2);
+                                const scale = gsap.utils.mapRange(0, window.innerWidth / 2, 1.05, 0.9, dist);
+                                const opacity = gsap.utils.mapRange(window.innerWidth / 4, window.innerWidth / 2, 1, 0.6, dist);
+                                gsap.to(phone, { scale: scale, opacity: opacity, duration: 0.3, ease: 'power2.out' });
+                            });
+                        }
+                    }
+                });
+            }
+
+            // --- Gallery Animation ---
+            gsap.utils.toArray('.gsap-gallery-item').forEach((item, i) => {
+                 gsap.fromTo(item,
+                    { opacity: 0, scale: 0.9, y: 50 },
+                    {
+                        opacity: 1, scale: 1, y: 0, duration: 1, ease: 'power3.out', delay: i * 0.1,
+                        scrollTrigger: { trigger: item.parentElement, start: 'top 80%', toggleActions: 'play none none none' }
+                    }
+                );
+            });
+
+            // Footer year
+            document.getElementById('year').textContent = new Date().getFullYear();
+        });
+    </script>
+
+</body>
+</html>
